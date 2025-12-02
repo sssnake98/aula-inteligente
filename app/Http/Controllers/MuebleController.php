@@ -2,63 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mueble;
 use Illuminate\Http\Request;
 
 class MuebleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $muebles = Mueble::all();
+        return view('muebles.index', compact('muebles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('muebles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'nro_inventario' => 'required|string|unique:muebles,nro_inventario',
+            'es_proyector' => 'boolean',
+            'estado' => 'required|in:disponible,en_reparacion',
+        ]);
+
+        Mueble::create($request->all());
+
+        return redirect()->route('muebles.index')->with('success', '✅ Mueble registrado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Mueble $mueble)
     {
-        //
+        return view('muebles.show', compact('mueble'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Mueble $mueble)
     {
-        //
+        return view('muebles.edit', compact('mueble'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Mueble $mueble)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'nro_inventario' => 'required|string|unique:muebles,nro_inventario,' . $mueble->id,
+            'es_proyector' => 'boolean',
+            'estado' => 'required|in:disponible,en_reparacion',
+        ]);
+
+        $mueble->update($request->all());
+
+        return redirect()->route('muebles.index')->with('success', '✅ Mueble actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Mueble $mueble)
     {
-        //
+        $mueble->delete();
+        return redirect()->route('muebles.index')->with('success', '✅ Mueble eliminado.');
     }
 }

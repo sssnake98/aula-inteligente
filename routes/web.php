@@ -28,3 +28,8 @@ Route::resource('aulas', \App\Http\Controllers\AulaController::class);
 Route::resource('materias', \App\Http\Controllers\MateriaController::class);
 Route::resource('docentes', \App\Http\Controllers\DocenteController::class);
 Route::resource('reservas', \App\Http\Controllers\ReservaController::class);
+Route::resource('disponibilidades', \App\Http\Controllers\DisponibilidadController::class);
+Route::resource('muebles', \App\Http\Controllers\MuebleController::class);
+Route::resource('aires', \App\Http\Controllers\AireAcondicionadoController::class);
+Route::resource('focos', \App\Http\Controllers\FocoController::class);
+Route::resource('cortinas', \App\Http\Controllers\CortinaController::class);

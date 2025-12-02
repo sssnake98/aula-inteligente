@@ -5,7 +5,7 @@
 @section('content')
 <div class="text-center mb-5">
     <h1 class="display-5 fw-bold">🏫 Bienvenido, Gabriel</h1>
-    <p class="lead text-muted">Selecciona una opción para comenzar</p>
+    <p class="lead text-muted">Gestiona tu Aula Inteligente desde aquí</p>
 </div>
 
 <div class="card-grid">
@@ -66,7 +66,7 @@
     </a>
 
     <!-- Disponibilidad -->
-    <a href="#" class="text-decoration-none disabled">
+    <a href="{{ route('disponibilidades.index') }}" class="text-decoration-none">
         <div class="feature-card">
             <div class="card-icon bg-danger">
                 <i class="fas fa-clock"></i>
@@ -74,21 +74,63 @@
             <div class="p-4">
                 <h4 class="card-title">Disponibilidad</h4>
                 <p class="text-muted">Consulta y gestiona horarios disponibles.</p>
-                <small class="badge bg-secondary text-white">Próximamente</small>
+                <small class="badge bg-light text-dark">Haz clic aquí para ver disponibilidad</small>
             </div>
         </div>
     </a>
 
-    <!-- Muebles/Recursos -->
-    <a href="#" class="text-decoration-none disabled">
+    <!-- Muebles -->
+    <a href="{{ route('muebles.index') }}" class="text-decoration-none">
         <div class="feature-card">
             <div class="card-icon bg-dark">
                 <i class="fas fa-couch"></i>
             </div>
             <div class="p-4">
-                <h4 class="card-title">Recursos</h4>
-                <p class="text-muted">Muebles, proyectores, aire acondicionado, etc.</p>
-                <small class="badge bg-secondary text-white">Próximamente</small>
+                <h4 class="card-title">Muebles</h4>
+                <p class="text-muted">Mesas, sillas, proyectores y más.</p>
+                <small class="badge bg-light text-dark">Haz clic aquí para gestionar muebles</small>
+            </div>
+        </div>
+    </a>
+
+    <!-- Aires -->
+    <a href="{{ route('aires.index') }}" class="text-decoration-none">
+        <div class="feature-card">
+            <div class="card-icon" style="background: #e3f2fd; color: #1976d2;">
+                <i class="fas fa-wind"></i>
+            </div>
+            <div class="p-4">
+                <h4 class="card-title">Aire Acond.</h4>
+                <p class="text-muted">Control de estado y mantenimiento.</p>
+                <small class="badge bg-light text-dark">Haz clic aquí para gestionar aires</small>
+            </div>
+        </div>
+    </a>
+
+    <!-- Focos -->
+    <a href="{{ route('focos.index') }}" class="text-decoration-none">
+        <div class="feature-card">
+            <div class="card-icon" style="background: #fff8e1; color: #f57c00;">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="p-4">
+                <h4 class="card-title">Focos</h4>
+                <p class="text-muted">Intensidad y ubicación.</p>
+                <small class="badge bg-light text-dark">Haz clic aquí para gestionar focos</small>
+            </div>
+        </div>
+    </a>
+
+    <!-- Cortinas -->
+    <a href="{{ route('cortinas.index') }}" class="text-decoration-none">
+        <div class="feature-card">
+            <div class="card-icon" style="background: #f3e5f5; color: #7b1fa2;">
+                <i class="fas fa-window-closed"></i>
+            </div>
+            <div class="p-4">
+                <h4 class="card-title">Cortinas</h4>
+                <p class="text-muted">Estado: abierta/cerrada.</p>
+                <small class="badge bg-light text-dark">Haz clic aquí para gestionar cortinas</small>
             </div>
         </div>
     </a>

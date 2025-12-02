@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AireAcondicionado;
 use Illuminate\Http\Request;
 
 class AireAcondicionadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $aires = AireAcondicionado::all();
+        return view('aires.index', compact('aires'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('aires.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'estado' => 'required|in:encendido,apagado',
+            'mantenimiento' => 'nullable|string',
+        ]);
+
+        AireAcondicionado::create($request->all());
+
+        return redirect()->route('aires.index')->with('success', '✅ Aire acondicionado registrado.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(AireAcondicionado $aire)
     {
-        //
+        return view('aires.show', compact('aire'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(AireAcondicionado $aire)
     {
-        //
+        return view('aires.edit', compact('aire'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, AireAcondicionado $aire)
     {
-        //
+        $request->validate([
+            'estado' => 'required|in:encendido,apagado',
+            'mantenimiento' => 'nullable|string',
+        ]);
+
+        $aire->update($request->all());
+
+        return redirect()->route('aires.index')->with('success', '✅ Aire actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(AireAcondicionado $aire)
     {
-        //
+        $aire->delete();
+        return redirect()->route('aires.index')->with('success', '✅ Aire eliminado.');
     }
 }

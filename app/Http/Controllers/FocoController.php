@@ -2,63 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foco;
 use Illuminate\Http\Request;
 
 class FocoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $focos = Foco::all();
+        return view('focos.index', compact('focos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('focos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'codigo' => 'required|string|unique:focos,codigo',
+            'tipo' => 'required|string|max:50',
+            'intensidad' => 'required|integer|min:0|max:100',
+            'ubicacion' => 'required|string|max:200',
+        ]);
+
+        Foco::create($request->all());
+
+        return redirect()->route('focos.index')->with('success', '✅ Foco registrado.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Foco $foco)
     {
-        //
+        return view('focos.show', compact('foco'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Foco $foco)
     {
-        //
+        return view('focos.edit', compact('foco'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Foco $foco)
     {
-        //
+        $request->validate([
+            'codigo' => 'required|string|unique:focos,codigo,' . $foco->id,
+            'tipo' => 'required|string|max:50',
+            'intensidad' => 'required|integer|min:0|max:100',
+            'ubicacion' => 'required|string|max:200',
+        ]);
+
+        $foco->update($request->all());
+
+        return redirect()->route('focos.index')->with('success', '✅ Foco actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Foco $foco)
     {
-        //
+        $foco->delete();
+        return redirect()->route('focos.index')->with('success', '✅ Foco eliminado.');
     }
 }

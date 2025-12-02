@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cortina extends Model
 {
-    //
+    protected $fillable = ['ubicacion', 'estado'];
 }

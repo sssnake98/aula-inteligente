@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cortina;
 use Illuminate\Http\Request;
 
 class CortinaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $cortinas = Cortina::all();
+        return view('cortinas.index', compact('cortinas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('cortinas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ubicacion' => 'required|string|max:200',
+            'estado' => 'required|in:abierta,cerrada',
+        ]);
+
+        Cortina::create($request->all());
+
+        return redirect()->route('cortinas.index')->with('success', '✅ Cortina registrada.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Cortina $cortina)
     {
-        //
+        return view('cortinas.show', compact('cortina'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Cortina $cortina)
     {
-        //
+        return view('cortinas.edit', compact('cortina'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Cortina $cortina)
     {
-        //
+        $request->validate([
+            'ubicacion' => 'required|string|max:200',
+            'estado' => 'required|in:abierta,cerrada',
+        ]);
+
+        $cortina->update($request->all());
+
+        return redirect()->route('cortinas.index')->with('success', '✅ Cortina actualizada.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Cortina $cortina)
     {
-        //
+        $cortina->delete();
+        return redirect()->route('cortinas.index')->with('success', '✅ Cortina eliminada.');
     }
 }
