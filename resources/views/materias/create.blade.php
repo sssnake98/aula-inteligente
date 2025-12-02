@@ -6,9 +6,14 @@
 <form action="{{ route('materias.store') }}" method="POST">
     @csrf
     <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input type="text" name="nombre" class="form-control" required>
-    </div>
+    <label>Nombre</label>
+    <input type="text" name="nombre" class="form-control" required>
+</div>
+<div class="mb-3">
+    <label>Año/Curso</label>
+    <input type="text" name="anio_curso" class="form-control" placeholder="Ej: 5to A, 2025, Maker" required>
+</div>
+    
     <div class="mb-3">
         <label class="form-label">Carrera</label>
         <input type="text" name="carrera" class="form-control" required>

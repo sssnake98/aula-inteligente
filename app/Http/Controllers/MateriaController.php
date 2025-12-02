@@ -1,10 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Materia; // ✅ Solo importar
+use Illuminate\Http\Request;
 
-class Materia extends Model
+class MateriaController extends Controller
 {
-    protected $fillable = ['nombre', 'carrera', 'tipo_cursado'];
+    public function index()
+{
+    $materias = Materia::all();
+    return view('materias.index', compact('materias'));
+
+    
+}
+public function create()
+{
+    return view('materias.create');
+}
 }

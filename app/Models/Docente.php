@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Docente extends Model
 {
-    //
+    protected $fillable = ['nombre', 'especialidad', 'dni']; // ✅ debe estar aquí
 }
